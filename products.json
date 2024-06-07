@@ -1,0 +1,83 @@
+[
+  {
+    "title": "Pantalón",
+    "description": "Pantalón cargo",
+    "price": 350,
+    "thumbnail": "thumbnail2.jpg",
+    "code": "PA0054",
+    "stock": 30
+  },
+  {
+    "title": "Camisa Loufer",
+    "description": "White T-shirt Loufer",
+    "price": 240,
+    "thumbnail": "loufertshirt.jpg",
+    "code": "PA0054",
+    "stock": 92
+  },
+  {
+    "title": "MacBook Pro M1 Pro",
+    "description": "Apple Notebook chip M1",
+    "price": 240,
+    "thumbnail": "macosphoto.jpg",
+    "code": "MACM1PRO01",
+    "stock": 16
+  },
+  {
+    "title": "Chaqueta Pure Class",
+    "description": "Pure Class Italy",
+    "price": 270,
+    "thumbnail": "jacket23.jpg",
+    "code": "JACX25",
+    "stock": 73
+  },
+  {
+    "title": "Moto BMW",
+    "description": "BMW NG34",
+    "price": 4200,
+    "thumbnail": "motobmw.jpg",
+    "code": "BMW98",
+    "stock": 24
+  },
+  {
+    "title": "Audifonos",
+    "description": "Sony 3X90",
+    "price": 400,
+    "thumbnail": "thumbnail4.jpg",
+    "code": "AU007",
+    "stock": 89
+  },
+  {
+    "id": "e9e5efd8-411b-46dd-b6e1-4b8c97d0a3f1",
+    "title": "Raqueta Babolat",
+    "description": "Babolat Racquet Aero Pure Strike 2023",
+    "code": "032784",
+    "price": 259,
+    "status": true,
+    "stock": "29",
+    "category": "Sport",
+    "thumbnails": []
+  },
+  {
+    "id": "d9a54449-ee1d-46ac-b9a6-d70bdbfa5dbd",
+    "title": "Raqueta Head",
+    "description": "Head Racquet Speed Sinner 2024",
+    "code": "0583043",
+    "price": 289,
+    "status": true,
+    "stock": "11",
+    "category": "Sport",
+    "thumbnails": []
+  },
+  {
+    "id": "1c4f0fb9-cbc9-437c-8ea7-04e94dab6c48",
+    "title": "Raqueta Head",
+    "description": "Head Racquet Speed Sinner 2023",
+    "code": "05834363",
+    "price": 249,
+    "status": true,
+    "stock": "14",
+    "category": "Sport",
+    "thumbnails": []
+  }
+]

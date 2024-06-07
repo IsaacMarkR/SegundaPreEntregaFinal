@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prodcutos en Tiempo Real made up by Isaac</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const socket = io();
+            socket.on('updateProducts', function (products) {
+                const productList = document.getElementById('productList');
+                productList.innerHTML = '';
+                products.forEach(product => {
+                    const item = document.createElement('li');
+                    item.textContent = `${product.title} - ${product.description} - ${product.price}`;
+                    productList.appendChild(item);
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Productos en Tiempo Real</h1>
+    <ul id="productList">
+    </ul>
+</body>
+</html>
