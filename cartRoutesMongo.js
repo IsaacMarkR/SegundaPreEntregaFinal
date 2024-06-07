@@ -37,5 +37,49 @@ module.exports = function(io) {
         }
     });
 
+    router.put('/api/carts/:cid', async (req, res) => {
+        try {
+            const cart = await Cart.findByIdAndUpdate(req.params.cid, {
+                $set: { products: req.body.products }
+            }, { new: true }).populate('products.product');
+            res.json({ success: true, message: 'Cart updated', cart });
+        } catch (error) {
+            res.status(500).json({ success: false, message: 'Error updating cart', error: error.message });
+        }
+    });
+
+    router.put('/api/carts/:cid/products/:pid', async (req, res) => {
+        try {
+            const cart = await Cart.findOneAndUpdate({ "_id": req.params.cid, "products.product": req.params.pid }, {
+                "$set": { "products.$.quantity": req.body.quantity }
+            }, { new: true }).populate('products.product');
+            res.json({ success: true, message: 'Product quantity updated', cart });
+        } catch (error) {
+            res.status(500).json({ success: false, message: 'Error updating product quantity', error: error.message });
+        }
+    });
+
+    router.delete('/api/carts/:cid/products/:pid', async (req, res) => {
+        try {
+            const cart = await Cart.findByIdAndUpdate(req.params.cid, {
+                $pull: { products: { product: req.params.pid } }
+            }, { new: true }).populate('products.product');
+            res.json({ success: true, message: 'Product removed from cart', cart });
+        } catch (error) {
+            res.status(500).json({ success: false, message: 'Error removing product from cart', error: error.message });
+        }
+    });
+
+    router.delete('/api/carts/:cid', async (req, res) => {
+        try {
+            const cart = await Cart.findByIdAndUpdate(req.params.cid, {
+                $set: { products: [] }
+            }, { new: true });
+            res.json({ success: true, message: 'All products removed from cart', cart });
+        } catch (error) {
+            res.status(500).json({ success: false, message: 'Error removing all products from cart', error: error.message });
+        }
+    });
+
     return router;
 };

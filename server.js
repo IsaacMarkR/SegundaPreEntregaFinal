@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 const { createServer } = require('http');
 const { Server } = require('socket.io');
 const { engine } = require('express-handlebars');
-const { loadProducts } = require('./productsUtils');
 const Product = require('./Product');
 const app = express();
 const httpServer = createServer(app);
@@ -24,8 +23,7 @@ app.use('/products', productRoutes);
 app.use('/api/carts', cartRoutes);
 
 app.get('/', async (req, res) => {
-    const products = await require('./productRoutes').loadProducts(io);
-    res.render('home', { products, layout: 'main' });
+    res.render('realTimeProducts', { layout: 'main' });
 });
 
 app.get('/realtimeproducts', (req, res) => {

@@ -5,17 +5,71 @@ module.exports = function(io) {
     const router = express.Router();
 
     router.get('/', async (req, res) => {
-        const { page = 1, limit = 10, sort = 'createdAt', order = -1 } = req.query;
+        const { page = 1, limit = 10, category, available, sortByPrice } = req.query;
+    
+        let query = {};
+        if (category) {
+            query.category = category;
+        }
+        if (available !== undefined) {
+            query.available = available === 'true';
+        }
+    
+        let sort = {};
+        if (sortByPrice) {
+            sort.price = sortByPrice === 'asc' ? 1 : -1;
+        }
+    
         try {
             const options = {
                 page: parseInt(page, 10),
                 limit: parseInt(limit, 10),
-                sort: { [sort]: order }
+                sort: sort
             };
-            const result = await Product.paginate({}, options);
-            res.json(result);
+    
+            const result = await Product.paginate(query, options);
+            res.json({
+                status: 'success',
+                payload: result.docs,
+                totalPages: result.totalPages,
+                prevPage: result.hasPrevPage ? result.prevPage : null,
+                nextPage: result.hasNextPage ? result.nextPage : null,
+                page: result.page,
+                hasPrevPage: result.hasPrevPage,
+                hasNextPage: result.hasNextPage,
+                prevLink: result.hasPrevPage ? `/products?page=${result.prevPage}` : null,
+                nextLink: result.hasNextPage ? `/products?page=${result.nextPage}` : null
+            });
         } catch (error) {
-            res.status(500).json({ error: 'Error retrieving products' });
+            console.error(error);
+            res.status(500).json({
+                status: 'error',
+                message: 'Failed to retrieve products'
+            });
+        }
+    });
+
+    router.get('/:id', async (req, res) => {
+        try {
+            const product = await Product.findById(req.params.id);
+            if (!product) {
+                return res.status(404).json({
+                    status: 'error',
+                    message: 'Product not found'
+                });
+            }
+            io.emit('productFetched', product);
+    
+            res.json({
+                status: 'success',
+                payload: product
+            });
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({
+                status: 'error',
+                message: 'Failed to retrieve product'
+            });
         }
     });
 
