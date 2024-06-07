@@ -79,5 +79,55 @@
     "stock": "14",
     "category": "Sport",
     "thumbnails": []
+  },
+  {
+    "title": "Raqueta Wilson Pro Staff",
+    "description": "Wilson Pro Staff Team V13, diseñada para un juego versátil y potente",
+    "code": "WIL12345",
+    "price": 310,
+    "status": true,
+    "stock": 15,
+    "category": "Sport",
+    "thumbnails": ["wilson-pro-staff.jpg"]
+  },
+  {
+    "title": "Balón Adidas UEFA Champions League",
+    "description": "Balón oficial de la UEFA Champions League 2023, tamaño y peso reglamentarios",
+    "code": "ADIDAS9923",
+    "price": 120,
+    "status": true,
+    "stock": 40,
+    "category": "Sport",
+    "thumbnails": ["adidas-champions-league-ball.jpg"]
+  },
+  {
+    "title": "Apple MacBook Pro 16",
+    "description": "MacBook Pro 16 pulgadas, chip M1 Pro, 16GB RAM, 1TB SSD",
+    "code": "MAC16M1PRO",
+    "price": 2499,
+    "status": true,
+    "stock": 10,
+    "category": "Technology",
+    "thumbnails": ["macbook-pro-16.jpg"]
+  },
+  {
+    "title": "Samsung Galaxy S22 Ultra",
+    "description": "Samsung Galaxy S22 Ultra, pantalla 6.8', 128GB, color Phantom Black",
+    "code": "SGS22ULTRA",
+    "price": 1099,
+    "status": true,
+    "stock": 25,
+    "category": "Technology",
+    "thumbnails": ["samsung-galaxy-s22-ultra.jpg"]
+  },
+  {
+    "title": "Apple Watch Series 7",
+    "description": "Apple Watch Series 7, 45mm, GPS, caja de aluminio en color rojo",
+    "code": "AWS745",
+    "price": 399,
+    "status": true,
+    "stock": 30,
+    "category": "Technology",
+    "thumbnails": ["apple-watch-series7.jpg"]
   }
 ]

@@ -1,26 +1,53 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Prodcutos en Tiempo Real made up by Isaac</title>
+    <title>Productos en Tiempo Real made up by Isaac</title>
     <script src="/socket.io/socket.io.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const socket = io();
-            socket.on('updateProducts', function (products) {
-                const productList = document.getElementById('productList');
-                productList.innerHTML = '';
-                products.forEach(product => {
-                    const item = document.createElement('li');
-                    item.textContent = `${product.title} - ${product.description} - ${product.price}`;
-                    productList.appendChild(item);
-                });
+            let currentPage = 1;
+            let totalPages = 0;
+
+            socket.on('updateProducts', function (data) {
+                const { product, totalPages: total } = data;
+                totalPages = total;
+                const productContainer = document.getElementById('productContainer');
+                const pageInfo = document.getElementById('pageInfo');
+
+                productContainer.innerHTML = `
+                <h2>${product.title}</h2>
+                <p>${product.description}</p>
+                <p>Precio: ${product.price}</p>
+            `;
+
+                pageInfo.textContent = `Página ${currentPage} de ${totalPages}`;
+            });
+
+            document.getElementById('prevPage').addEventListener('click', function () {
+                if (currentPage > 1) {
+                    currentPage--;
+                    socket.emit('requestPage', currentPage);
+                }
+            });
+
+            document.getElementById('nextPage').addEventListener('click', function () {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    socket.emit('requestPage', currentPage);
+                }
             });
         });
     </script>
 </head>
+
 <body>
     <h1>Productos en Tiempo Real</h1>
-    <ul id="productList">
-    </ul>
+    <button id="prevPage">Anterior</button>
+    <button id="nextPage">Siguiente</button>
+    <div id="pageInfo"></div>
+    <div id="productContainer"></div>
 </body>
+
 </html>
